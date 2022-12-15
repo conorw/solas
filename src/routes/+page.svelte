@@ -1,7 +1,7 @@
 <script>
 	import { page } from '$app/stores'
-	import Account from './Auth/Account.svelte'
-	import Auth from './Auth/Auth.svelte'
+	import Account from './auth/profile/+page.svelte'
+	import Auth from './auth/login/Auth.svelte'
 
     console.log('PARAMS', {params: $page.url})
 </script>
@@ -11,8 +11,8 @@
 	<meta name="description" content="Solas Tracker" />
 </svelte:head>
 
-{#if !$page.data.session || $page.url.searchParams.get('type') === 'recovery'}
+{#if !$page.data.session}
 	<Auth />
 {:else}
-	<Account session={$page.data.session} />
+	Welcome
 {/if}

@@ -1,19 +1,21 @@
 <script lang="ts">
 	import { supabaseClient } from '$lib/supabaseClient';
+	import { page } from '$app/stores'
 	import { goto, invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import './styles.css';
+	import Auth from './auth/login/Auth.svelte';
 
 	onMount(() => {
 		const {
 			data: { subscription }
 		} = supabaseClient.auth.onAuthStateChange((event) => {
-            console.log('auth state changed', event);
+			console.log('auth state changed', event);
 			invalidate('supabase:auth');
-            if (event === "PASSWORD_RECOVERY") {
-                console.log('password recovery')
-                goto('/auth/reset')
-            }
+			if (event === 'PASSWORD_RECOVERY') {
+				console.log('password recovery');
+				goto('/auth/reset');
+			}
 		});
 
 		return () => {
@@ -22,6 +24,13 @@
 	});
 </script>
 
-<div class="container" style="padding: 50px 0 100px 0">
+<nav>
+	<a href="/">Home</a>
+	<a href="/auth/profile">Profile</a>
+</nav>
+{#if !$page.data.session}
+	<Auth />
+{:else}
 	<slot />
-</div>
+{/if}
+

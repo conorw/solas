@@ -17,12 +17,11 @@
 			if (view === 'sign_in') {
 				const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
 				if (error) throw error;
-				alert('Check your email for the login link!');
+
 			} else {
 				const { error } = await supabaseClient.auth.updateUser({ password });
                 goto('/')
 				if (error) throw error;
-				alert('Check your email for the login link!');
 			}
 		} catch (error) {
 			if (error instanceof Error) {
