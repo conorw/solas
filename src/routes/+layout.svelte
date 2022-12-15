@@ -7,7 +7,8 @@
 	onMount(() => {
 		const {
 			data: { subscription }
-		} = supabaseClient.auth.onAuthStateChange(() => {
+		} = supabaseClient.auth.onAuthStateChange((event) => {
+            console.log('auth state changed', event);
 			invalidate('supabase:auth');
 		});
 
