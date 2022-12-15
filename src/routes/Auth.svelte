@@ -5,6 +5,7 @@
 	let loading = false;
 	let email: string = $page.url.searchParams.get('email') || '';
 	let password: string;
+    console.log('PARAMS', {params: $page.url})
 	let view: any = $page.url.searchParams.get('type') || 'sign_in';
 	let accessToken: any = $page.url.searchParams.get('access_token') || '';
 
