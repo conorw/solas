@@ -2,6 +2,8 @@
 	import { page } from '$app/stores'
 	import Account from './Auth/Account.svelte'
 	import Auth from './Auth/Auth.svelte'
+
+    console.log('PARAMS', {params: $page.url})
 </script>
 
 <svelte:head>
