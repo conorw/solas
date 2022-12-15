@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { supabaseClient } from '$lib/supabaseClient';
-	import { invalidate } from '$app/navigation';
+	import { goto, invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import './styles.css';
 
@@ -10,6 +10,10 @@
 		} = supabaseClient.auth.onAuthStateChange((event) => {
             console.log('auth state changed', event);
 			invalidate('supabase:auth');
+            if (event === "PASSWORD_RECOVERY") {
+                console.log('password recovery')
+                goto('/auth/reset')
+            }
 		});
 
 		return () => {

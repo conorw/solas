@@ -1,15 +1,15 @@
 <script>
 	import { page } from '$app/stores'
-	import Account from './Account.svelte'
-	import Auth from './Auth.svelte'
+	import Account from './Auth/Account.svelte'
+	import Auth from './Auth/Auth.svelte'
 </script>
 
 <svelte:head>
-	<title>Supabase + SvelteKit</title>
-	<meta name="description" content="SvelteKit using supabase-js v2" />
+	<title>Solas Attendance Tracker</title>
+	<meta name="description" content="Solas Tracker" />
 </svelte:head>
 
-{#if !$page.data.session}
+{#if !$page.data.session || $page.url.searchParams.get('type') === 'recovery'}
 	<Auth />
 {:else}
 	<Account session={$page.data.session} />

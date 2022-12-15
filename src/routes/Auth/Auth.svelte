@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { supabaseClient } from '$lib/supabaseClient';
 	import { page } from '$app/stores';
+	import { goto } from '$app/navigation';
 	// import Auth from 'supabase-ui-svelte'
 	let loading = false;
 	let email: string = $page.url.searchParams.get('email') || '';
@@ -18,7 +19,8 @@
 				if (error) throw error;
 				alert('Check your email for the login link!');
 			} else {
-				const { error } = await supabaseClient.auth.updateUser({ accessToken, password });
+				const { error } = await supabaseClient.auth.updateUser({ password });
+                goto('/')
 				if (error) throw error;
 				alert('Check your email for the login link!');
 			}
